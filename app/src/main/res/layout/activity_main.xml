@@ -11,13 +11,8 @@
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="466dp">
+        android:layout_height="453dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView

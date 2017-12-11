@@ -12,7 +12,40 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationView.OnNavigationItemSelectedListener bnv
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            switch (item.getItemId()) {
+
+                case R.id.inicioItem:
+                    transaction.replace(R.id.frame_layout, new Fragment_home()).commit();
+                    return true;
+
+                case R.id.musicaItem:
+                    transaction.replace(R.id.frame_layout, new Fragment_musica()).commit();
+                    return true;
+
+                case R.id.videosItem:
+                    transaction.replace(R.id.frame_layout, new Fragment_video()).commit();
+                    return true;
+
+                case R.id.imagensItem:
+                    transaction.replace(R.id.frame_layout, new Fragment_imagem()).commit();
+                    return true;
+
+                case R.id.documentosItem:
+                    transaction.replace(R.id.frame_layout, new Fragment_doc()).commit();
+                    return true;
+
+            }
+            return false;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,41 +53,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(bnv);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-
         transaction.replace(R.id.frame_layout, new Fragment_home()).commit();
-
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-                if (item.getItemId() == R.id.inicioItem) {
-                    transaction.replace(R.id.frame_layout, new Fragment_home()).commit();
-                } else {
-                    if (item.getItemId() == R.id.musicaItem) {
-                        transaction.replace(R.id.frame_layout, new Fragment_musica()).commit();
-                    } else {
-                        if (item.getItemId() == R.id.videosItem) {
-                            transaction.replace(R.id.frame_layout, new Fragment_video()).commit();
-                        } else {
-                            if (item.getItemId() == R.id.imagensItem) {
-                                transaction.replace(R.id.frame_layout, new Fragment_imagem()).commit();
-                            } else {
-                                if (item.getItemId() == R.id.documentosItem) {
-                                    transaction.replace(R.id.frame_layout, new Fragment_doc()).commit();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return true;
-            }
-        });
     }
 }
