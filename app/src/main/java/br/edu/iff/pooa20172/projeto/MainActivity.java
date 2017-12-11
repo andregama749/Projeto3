@@ -1,6 +1,8 @@
 package br.edu.iff.pooa20172.projeto;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
@@ -9,8 +11,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.VideoView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button reproduzir;
+    private VideoView video_view;
+    private EditText et_URI;
 
     private BottomNavigationView.OnNavigationItemSelectedListener bnv
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.videosItem:
                     transaction.replace(R.id.frame_layout, new Fragment_video()).commit();
+                    reproduzir.setOnClickListener(MainActivity.this);
                     return true;
 
                 case R.id.imagensItem:
@@ -59,5 +70,27 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, new Fragment_home()).commit();
+
+        reproduzir = (Button) findViewById(R.id.button);
+        video_view = (VideoView) findViewById(R.id.videoView);
+        et_URI = (EditText) findViewById(R.id.ed_URL);
+    }
+
+    @Override
+    public void onClick(View v) {
+        try{
+            Uri uri = Uri.parse(et_URI.getText().toString());
+            video_view.setVideoURI(uri);
+        }
+        catch (Exception e){
+
+        }
+        video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                video_view.start();
+            }
+        });
+
     }
 }
