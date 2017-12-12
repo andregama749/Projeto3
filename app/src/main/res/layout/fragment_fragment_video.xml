@@ -30,7 +30,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="https://www.youtube.com/watch?v=4ED7XuTBKqc" />
 
     <Button
         android:id="@+id/button"

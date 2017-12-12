@@ -1,13 +1,17 @@
 package br.edu.iff.pooa20172.projeto;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 
 /**
@@ -18,7 +22,7 @@ import android.widget.Toast;
  * Use the {@link Fragment_video#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_video extends Fragment {
+public class Fragment_video extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +31,10 @@ public class Fragment_video extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Button reproduzir;
+    private VideoView video_view;
+    private EditText et_URI;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +67,18 @@ public class Fragment_video extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        reproduzir = reproduzir.findViewById(R.id.button);
+        video_view = video_view.findViewById(R.id.videoView);
+        et_URI = et_URI.findViewById(R.id.ed_URL);
+        reproduzir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(et_URI.getText().toString());
+                video_view.setVideoURI(uri);
+                video_view.start();
+            }
+        });
     }
 
     @Override

@@ -16,11 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.VideoView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private Button reproduzir;
-    private VideoView video_view;
-    private EditText et_URI;
+public class MainActivity extends AppCompatActivity{
 
     private BottomNavigationView.OnNavigationItemSelectedListener bnv
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -41,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 case R.id.videosItem:
                     transaction.replace(R.id.frame_layout, new Fragment_video()).commit();
-                    reproduzir.setOnClickListener(MainActivity.this);
                     return true;
 
                 case R.id.imagensItem:
@@ -70,27 +65,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, new Fragment_home()).commit();
-
-        reproduzir = (Button) findViewById(R.id.button);
-        video_view = (VideoView) findViewById(R.id.videoView);
-        et_URI = (EditText) findViewById(R.id.ed_URL);
-    }
-
-    @Override
-    public void onClick(View v) {
-        try{
-            Uri uri = Uri.parse(et_URI.getText().toString());
-            video_view.setVideoURI(uri);
-        }
-        catch (Exception e){
-
-        }
-        video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                video_view.start();
-            }
-        });
-
     }
 }
