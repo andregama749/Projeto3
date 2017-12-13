@@ -32,9 +32,9 @@ public class Fragment_video extends Fragment  {
     private String mParam1;
     private String mParam2;
 
-    private Button reproduzir;
-    private VideoView video_view;
-    private EditText et_URI;
+    private Button button;
+    private VideoView videoView;
+    private EditText editText;
 
     private OnFragmentInteractionListener mListener;
 
@@ -67,25 +67,26 @@ public class Fragment_video extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        reproduzir = reproduzir.findViewById(R.id.button);
-        video_view = video_view.findViewById(R.id.videoView);
-        et_URI = et_URI.findViewById(R.id.ed_URL);
-        reproduzir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(et_URI.getText().toString());
-                video_view.setVideoURI(uri);
-                video_view.start();
-            }
-        });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_video, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_fragment_video,container,false);
+        button = (Button) view.findViewById(R.id.button);
+        editText = (EditText) view.findViewById(R.id.ed_URL);
+        videoView = (VideoView) view.findViewById(R.id.videoView);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(editText.getText().toString());
+                videoView.setVideoURI(uri);
+                videoView.start();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
