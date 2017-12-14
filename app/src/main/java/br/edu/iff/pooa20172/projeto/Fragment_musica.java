@@ -3,11 +3,16 @@ package br.edu.iff.pooa20172.projeto;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
 /**
@@ -29,6 +34,8 @@ public class Fragment_musica extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private ListView listView;
 
     public Fragment_musica() {
         // Required empty public constructor
@@ -64,8 +71,24 @@ public class Fragment_musica extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_musica, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_fragment_musica,container,false);
+        listView = (ListView) view.findViewById(R.id.videoView);
+
+        ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
+
+
+
+        return view;
+    }
+
+    public ArrayList<File> findSongs(File root){
+        File[] files = root.listFiles();
+        ArrayList<File> al = new ArrayList<File>();
+
+        for(File singleFiles : files){
+            if()
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

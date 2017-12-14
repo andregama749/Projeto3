@@ -5,9 +5,11 @@
     tools:context="br.edu.iff.pooa20172.projeto.Fragment_musica">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Músicas" />
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
